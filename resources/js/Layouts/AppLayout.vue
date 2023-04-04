@@ -56,9 +56,7 @@ const logout = () => {
 
               <v-btn variant="text" icon="mdi-filter"></v-btn>
 
-              <v-btn variant="text">
-                   <v-icon icon="fas fa-home" />
-              </v-btn>
+              <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
             </v-app-bar>
 
             <v-navigation-drawer v-model="drawer" location="bottom" temporary>
@@ -77,45 +75,57 @@ const logout = () => {
       <main>
         <v-row no-gutters>
           <v-col cols="2" class="py-10">
-            <el-menu
-              active-text-color="#ffd04b"
-              background-color="#545c64"
-              class="el-menu-vertical-demo"
-              default-active="2"
-              text-color="#fff"
-              @open="handleOpen"
-              @close="handleClose"
-            >
-              <el-sub-menu index="1">
-                <template #title>
-                  <el-icon><location /></el-icon>
-                  <span>Navigator One</span>
-                </template>
-                <el-menu-item-group title="Group One">
-                  <el-menu-item index="1-1">item one</el-menu-item>
-                  <el-menu-item index="1-2">item two</el-menu-item>
-                </el-menu-item-group>
-                <el-menu-item-group title="Group Two">
-                  <el-menu-item index="1-3">item three</el-menu-item>
-                </el-menu-item-group>
-                <el-sub-menu index="1-4">
-                  <template #title>item four</template>
-                  <el-menu-item index="1-4-1">item one</el-menu-item>
-                </el-sub-menu>
-              </el-sub-menu>
-              <el-menu-item index="2">
-                <el-icon><icon-menu /></el-icon>
-                <span>Navigator Two</span>
-              </el-menu-item>
-              <el-menu-item index="3" disabled>
-                <el-icon><document /></el-icon>
-                <span>Navigator Three</span>
-              </el-menu-item>
-              <el-menu-item index="4">
-                <el-icon><setting /></el-icon>
-                <span>Navigator Four</span>
-              </el-menu-item>
-            </el-menu>
+           <v-card
+    class="mx-auto"
+  >
+    <v-list v-model:opened="open">
+      <v-list-item prepend-icon="fas fa-home" title="Home" style="font-size: 13px"></v-list-item>
+
+      <v-list-group value="Users">
+        <template v-slot:activator="{ props }">
+          <v-list-item
+            v-bind="props"
+            prepend-icon="fas fa-user"
+            title="Users"
+          ></v-list-item>
+        </template>
+
+        <v-list-group value="Admin">
+          <template v-slot:activator="{ props }">
+            <v-list-item
+              v-bind="props"
+              title="Admin"
+            ></v-list-item>
+          </template>
+
+          <v-list-item
+            v-for="([title, icon], i) in admins"
+            :key="i"
+            :title="title"
+            :prepend-icon="icon"
+            :value="title"
+          ></v-list-item>
+        </v-list-group>
+
+        <v-list-group value="Actions">
+          <template v-slot:activator="{ props }">
+            <v-list-item
+              v-bind="props"
+              title="Actions"
+            ></v-list-item>
+          </template>
+
+          <v-list-item
+            v-for="([title, icon], i) in cruds"
+            :key="i"
+            :value="title"
+            :title="title"
+            :prepend-icon="icon"
+          ></v-list-item>
+        </v-list-group>
+      </v-list-group>
+    </v-list>
+  </v-card>
           </v-col>
 
           <v-col cols="10">
@@ -149,6 +159,17 @@ export default {
         title: "Buzz",
         value: "buzz",
       },
+    ],
+    open: ['Users'],
+    admins: [
+      ['Management', 'fas fa-users-gear'],
+      ['Settings', 'fas fa-gear'],
+    ],
+    cruds: [
+      ['Create', 'fas fa-plus'],
+      ['Read', 'fas fa-border-all'],
+      ['Update', 'fas fa-file-pen'],
+      ['Delete', 'fas fa-trash'],
     ],
   }),
 
