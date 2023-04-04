@@ -56,7 +56,9 @@ const logout = () => {
 
               <v-btn variant="text" icon="mdi-filter"></v-btn>
 
-              <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+              <v-btn variant="text">
+                   <v-icon icon="fas fa-home" />
+              </v-btn>
             </v-app-bar>
 
             <v-navigation-drawer v-model="drawer" location="bottom" temporary>

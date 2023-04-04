@@ -12,7 +12,8 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import { aliases, fa } from 'vuetify/iconsets/fa'
-import { mdi } from 'vuetify/iconsets/mdi'
+import '@fortawesome/fontawesome-free/css/all.css'
+import { md } from 'vuetify/iconsets/md'
 //ELEMENT UI
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
@@ -24,8 +25,8 @@ const vuetify = createVuetify({
         defaultSet: 'fa',
         aliases,
         sets: {
-          fa,
-          mdi,
+            fa,
+            md,
         }
     },
   })
